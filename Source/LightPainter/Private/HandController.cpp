@@ -2,6 +2,7 @@
 
 
 #include "Public/HandController.h"
+#include "Engine/World.h"
 
 AHandController::AHandController()
 {
@@ -11,6 +12,17 @@ AHandController::AHandController()
 	SetRootComponent(MotionController);
 	MotionController->SetTrackingSource(EControllerHand::Right);
 	MotionController->SetShowDeviceModel(true);
+}
+
+void AHandController::TriggerPressed()
+{
+	AStroke* Stroke = GetWorld()->SpawnActor<AStroke>(StrokeClass);
+	Stroke->SetActorLocation(GetActorLocation());
+}
+
+void AHandController::TriggerReleased()
+{
+
 }
 
 void AHandController::BeginPlay()
