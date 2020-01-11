@@ -14,26 +14,33 @@ AHandController::AHandController()
 	MotionController->SetShowDeviceModel(true);
 }
 
-void AHandController::TriggerPressed()
-{
-	AStroke* Stroke = GetWorld()->SpawnActor<AStroke>(StrokeClass);
-	Stroke->SetActorLocation(GetActorLocation());
-}
-
-void AHandController::TriggerReleased()
-{
-
-}
-
 void AHandController::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
 }
 
 void AHandController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	if (CurrentStroke)
+	{
+		CurrentStroke->Update(GetActorLocation());
+	}
+
 }
+
+void AHandController::TriggerPressed()
+{
+	CurrentStroke = GetWorld()->SpawnActor<AStroke>(StrokeClass);
+	CurrentStroke->SetActorLocation(GetActorLocation());
+}
+
+void AHandController::TriggerReleased()
+{
+	CurrentStroke = nullptr;
+}
+
+
 
