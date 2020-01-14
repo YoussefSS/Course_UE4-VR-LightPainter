@@ -23,8 +23,16 @@ public:
 	void SetState(FString NewState) { State = NewState; }
 	FString GetState() const { return State; }
 
+	void SerializeFromWorld(UWorld* World);
+	void DeserializeToWorld(UWorld* World);
+
 private:
+	void ClearWorld(UWorld* World);
+
 	// State
 	UPROPERTY()
 	FString State;
+
+	UPROPERTY()
+	TArray<TSubclassOf<class AStroke>> Strokes; // This is for saving blueprints so we don't just save the base cpp class
 };
