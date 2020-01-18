@@ -23,11 +23,6 @@ UPainterSaveGame* UPainterSaveGame::Create()
 
 bool UPainterSaveGame::Save()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Painting Index:"));
-	for (FString SlotName : UPainterSaveGameIndex::Load()->GetSlotNames())
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Painting Name: %s"), *SlotName);
-	}
 	return UGameplayStatics::SaveGameToSlot(this, SlotName, 0);
 }
 
