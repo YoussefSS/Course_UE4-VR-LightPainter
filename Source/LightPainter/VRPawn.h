@@ -42,4 +42,7 @@ private:
 	// Reference
 	UPROPERTY()
 	AHandControllerBase* RightPaintBrushHandController;
+
+	// State
+	FString CurrentSlotName;
 };
