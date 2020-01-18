@@ -25,4 +25,9 @@ protected:
 	// Binds a component in the UI heirarchy with the name Painting Grid
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, meta = (BindWidget))
 	UUniformGridPanel* PaintingGrid;
+
+private:
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<UUserWidget> GridCardClass;
+
 };
