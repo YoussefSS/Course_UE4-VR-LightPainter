@@ -2,13 +2,16 @@
 
 
 #include "Public/UI/PaintingPicker/PaintingGrid.h"
+
 #include "Components/SizeBox.h"
 
-void UPaintingGrid::AddPainting(int32 PaintingIndex)
+void UPaintingGrid::AddPainting(int32 PaintingIndex, FString PaintingName)
 {
 	if (!PaintingGrid) return;
-	UUserWidget* NewWidget = CreateWidget<UUserWidget>(GetWorld(), GridCardClass);
+	UPaintingGridCard* NewWidget = CreateWidget<UPaintingGridCard>(GetWorld(), GridCardClass);
 	if (!NewWidget) return;
+
+	NewWidget->SetPaintingName(PaintingName);
 
 	USizeBox* CardContainer = Cast<USizeBox>(PaintingGrid->GetChildAt(PaintingIndex));
 	if (!CardContainer) return;
