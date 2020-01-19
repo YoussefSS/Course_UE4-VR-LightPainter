@@ -16,5 +16,7 @@ void UPaintingGridCard::SetPaintingName(FString NewPaintingName)
 void UPaintingGridCard::CardButtonClicked()
 {
 	UStereoLayerFunctionLibrary::ShowSplashScreen(); // Just following along the lecs, this is incase it takes a long time to load into the level, we then need to hide it
+
+	//TODO: Refactor out magic string
 	UGameplayStatics::OpenLevel(GetWorld(), TEXT("Canvas"), true, "SlotName=" + PaintingName); // the slotname + bit is passing state between levels
 }
