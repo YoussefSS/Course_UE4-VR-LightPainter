@@ -5,6 +5,9 @@
 #include "Engine/World.h"
 #include "Public/Saving/PainterSaveGame.h"
 #include "Components\InputComponent.h"
+#include "Public\PaintingGameMode.h"
+#include "Kismet/GameplayStatics.h"
+#include "Kismet/StereoLayerFunctionLibrary.h"
 
 AVRPawn::AVRPawn()
 {
@@ -47,12 +50,11 @@ void AVRPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 void AVRPawn::Save()
 {
-	UPainterSaveGame* Painting = UPainterSaveGame::Load(CurrentSlotName);
-	if (Painting)
-	{
-		Painting->SetState("Hello World!");
-		Painting->SerializeFromWorld(GetWorld());
-		Painting->Save();
-	}
+	auto GameMode = Cast<APaintingGameMode>(GetWorld()->GetAuthGameMode());
+	if (!GameMode) return;
+
+	GameMode->Save();
+	UStereoLayerFunctionLibrary::ShowSplashScreen();
+	UGameplayStatics::OpenLevel(GetWorld(), TEXT("MainMenu")); 
 }
 

@@ -15,16 +15,32 @@ void APaintingGameMode::InitGame(const FString& MapName, const FString& Options,
 	UE_LOG(LogTemp, Warning, TEXT("SlotName: %s"), *SlotName);
 }
 
+
 void APaintingGameMode::BeginPlay()
 {
 	Super::BeginPlay();
 
-	
+	Load();
+
+	UStereoLayerFunctionLibrary::HideSplashScreen();// just following along, in case we had a splash screen
+}
+
+void APaintingGameMode::Save()
+{
+	UPainterSaveGame* Painting = UPainterSaveGame::Load(SlotName);
+	if (Painting)
+	{
+		Painting->SerializeFromWorld(GetWorld());
+		Painting->Save();
+	}
+}
+
+void APaintingGameMode::Load()
+{
 	UPainterSaveGame* Painting = UPainterSaveGame::Load(SlotName);
 	if (Painting)
 	{
 		Painting->DeserializeToWorld(GetWorld());
-		UStereoLayerFunctionLibrary::HideSplashScreen();// just following along, in case we had a splash screen
 	}
 	else
 	{
