@@ -18,7 +18,7 @@ public:
 
 	void AddPainting();
 
-	void ToggleDeleteMode() { UE_LOG(LogTemp, Warning, TEXT("Delete toggle mode")); }
+	void ToggleDeleteMode();
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

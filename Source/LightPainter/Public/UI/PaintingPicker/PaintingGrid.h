@@ -21,6 +21,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void AddPainting(int32 PaintingIndex, FString PaintingName);
 
+	void ClearPaintings();
 protected:
 
 	// Binds a component in the UI heirarchy with the name Painting Grid
