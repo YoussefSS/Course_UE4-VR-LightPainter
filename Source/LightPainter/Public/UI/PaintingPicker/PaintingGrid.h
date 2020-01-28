@@ -6,6 +6,9 @@
 #include "Blueprint/UserWidget.h"
 #include "Components/UniformGridPanel.h"
 #include "PaintingGridCard.h"
+#include "Components/HorizontalBox.h"
+#include "Public/UI/PaintingPicker/PaginationDot.h"
+
 #include "PaintingGrid.generated.h"
 
 /**
@@ -21,6 +24,10 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void AddPainting(int32 PaintingIndex, FString PaintingName);
 
+	// API for adding a pagination dot
+	void AddPaginationDot(bool Active);
+
+
 	void ClearPaintings();
 protected:
 
@@ -28,8 +35,13 @@ protected:
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, meta = (BindWidget))
 	UUniformGridPanel* PaintingGrid;
 
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, meta = (BindWidget))
+	UHorizontalBox* PaginationDots;
+
 private:
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<UPaintingGridCard> GridCardClass;
 
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<UPaginationDot> PaginationDotClass;
 };
