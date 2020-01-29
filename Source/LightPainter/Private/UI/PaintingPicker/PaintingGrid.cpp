@@ -30,6 +30,13 @@ void UPaintingGrid::ClearPaintings()
 	}
 }
 
+void UPaintingGrid::ClearPaginationDots()
+{
+	if (!PaginationDots) return;
+
+	PaginationDots->ClearChildren();
+}
+
 int32 UPaintingGrid::GetNumberOfSlots() const
 {
 	return PaintingGrid->GetChildrenCount();

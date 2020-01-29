@@ -29,6 +29,7 @@ public:
 
 
 	void ClearPaintings();
+	void ClearPaginationDots();
 
 	int32 GetNumberOfSlots() const;
 protected:
