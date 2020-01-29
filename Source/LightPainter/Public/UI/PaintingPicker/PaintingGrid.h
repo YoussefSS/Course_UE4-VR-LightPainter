@@ -29,6 +29,8 @@ public:
 
 
 	void ClearPaintings();
+
+	int32 GetNumberOfSlots() const;
 protected:
 
 	// Binds a component in the UI heirarchy with the name Painting Grid
