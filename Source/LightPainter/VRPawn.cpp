@@ -7,6 +7,8 @@
 #include "Components\InputComponent.h"
 #include "Public\PaintingGameMode.h"
 #include "Kismet/GameplayStatics.h"
+#include "Public/UI/PaintingPicker/PaintingPicker.h"
+#include "EngineUtils.h"
 #include "Kismet/StereoLayerFunctionLibrary.h"
 
 AVRPawn::AVRPawn()
@@ -60,8 +62,16 @@ void AVRPawn::PaginateRightAxisInput(float AxisValue)
 	// Detection of rising edge
 	if (PaginationOffset != LastPaginationOffset && PaginationOffset != 0)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Paginate %d"), PaginationOffset);
+		UpdateCurrentPage(PaginationOffset);
 	}
 
 	LastPaginationOffset = PaginationOffset;
+}
+
+void AVRPawn::UpdateCurrentPage(int32 Offset)
+{
+	for (TActorIterator<APaintingPicker>PaintingPickerItr(GetWorld()); PaintingPickerItr; ++PaintingPickerItr)
+	{
+		PaintingPickerItr->UpdateCurrentPage(Offset);
+	}
 }
