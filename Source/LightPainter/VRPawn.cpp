@@ -47,4 +47,21 @@ void AVRPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 	PlayerInputComponent->BindAction(TEXT("RightTrigger"), EInputEvent::IE_Pressed, this, &AVRPawn::RightTriggerPressed);
 	PlayerInputComponent->BindAction(TEXT("RightTrigger"), EInputEvent::IE_Released, this, &AVRPawn::RightTriggerReleased);
+
+	PlayerInputComponent->BindAxis(TEXT("PaginateRight"), this, &AVRPawn::PaginateRightAxisInput);
+}
+
+void AVRPawn::PaginateRightAxisInput(float AxisValue)
+{
+	int32 PaginationOffset = 0;
+	PaginationOffset += AxisValue > PaginationThumbstickThreshold ? 1 : 0;
+	PaginationOffset += AxisValue < -PaginationThumbstickThreshold ? -1 : 0;
+
+	// Detection of rising edge
+	if (PaginationOffset != LastPaginationOffset && PaginationOffset != 0)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Paginate %d"), PaginationOffset);
+	}
+
+	LastPaginationOffset = PaginationOffset;
 }
